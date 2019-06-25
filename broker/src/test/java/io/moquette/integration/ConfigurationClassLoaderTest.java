@@ -64,17 +64,17 @@ public class ConfigurationClassLoaderTest implements IAuthenticator, IAuthorizat
     }
 
     @Override
-    public boolean checkValid(String clientID, String username, byte[] password) {
+    public boolean checkValid(String clientID, String username, byte[] password, String clientAddress) {
         return true;
     }
 
     @Override
-    public boolean canWrite(Topic topic, String user, String client) {
+    public boolean canWrite(Topic topic, String user, String client, String clientAddress) {
         return true;
     }
 
     @Override
-    public boolean canRead(Topic topic, String user, String client) {
+    public boolean canRead(Topic topic, String user, String client, String clientAddress) {
         return true;
     }
 

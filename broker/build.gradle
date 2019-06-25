@@ -9,6 +9,7 @@ dependencies {
     compile group: 'io.netty', name: 'netty-codec', version: nettyVersion
     compile group: 'io.netty', name: 'netty-codec-http', version: nettyVersion
     compile group: 'io.netty', name: 'netty-codec-mqtt', version: nettyVersion
+    compile group: 'io.netty', name: 'netty-codec-haproxy', version: nettyVersion
 
     compile group: 'io.netty', name: 'netty-transport-native-epoll', version: nettyVersion, classifier: 'linux-x86_64'
     // <classifier>${os.detected.name}-${os.detected.arch}</classifier>

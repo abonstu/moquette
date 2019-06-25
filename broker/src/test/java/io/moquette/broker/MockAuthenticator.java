@@ -36,7 +36,7 @@ public class MockAuthenticator implements IAuthenticator {
     }
 
     @Override
-    public boolean checkValid(String clientId, String username, byte[] password) {
+    public boolean checkValid(String clientId, String username, byte[] password, String clientAddress) {
         if (!m_clientIds.contains(clientId)) {
             return false;
         }

@@ -34,10 +34,12 @@ public final class NettyUtils {
     private static final String ATTR_CLIENTID = "ClientID";
     private static final String CLEAN_SESSION = "removeTemporaryQoS2";
     private static final String KEEP_ALIVE = "keepAlive";
+    private static final String CLIENT_ADDRESS = "clientAddress";
     private static final AttributeKey<Object> ATTR_KEY_KEEPALIVE = AttributeKey.valueOf(KEEP_ALIVE);
     private static final AttributeKey<Object> ATTR_KEY_CLEANSESSION = AttributeKey.valueOf(CLEAN_SESSION);
     private static final AttributeKey<Object> ATTR_KEY_CLIENTID = AttributeKey.valueOf(ATTR_CLIENTID);
     private static final AttributeKey<Object> ATTR_KEY_USERNAME = AttributeKey.valueOf(ATTR_USERNAME);
+    private static final AttributeKey<Object> ATTR_KEY_CLIENTADDRESS = AttributeKey.valueOf(CLIENT_ADDRESS);
 
     public static Object getAttribute(ChannelHandlerContext ctx, AttributeKey<Object> key) {
         Attribute<Object> attr = ctx.channel().attr(key);
@@ -70,6 +72,14 @@ public final class NettyUtils {
 
     public static String userName(Channel channel) {
         return (String) channel.attr(NettyUtils.ATTR_KEY_USERNAME).get();
+    }
+    
+    public static void clientAddress(Channel channel, String clientAddress) {
+    	channel.attr(NettyUtils.ATTR_KEY_CLIENTADDRESS).set(clientAddress);
+    }
+    
+    public static String clientAddress(Channel channel) {
+        return (String) channel.attr(NettyUtils.ATTR_KEY_CLIENTADDRESS).get();
     }
 
     /**

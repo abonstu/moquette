@@ -137,7 +137,7 @@ public class SessionRegistry {
         } else if (!newIsClean && oldSession.disconnected()) {
             // case 3
             final String username = mqttConnection.getUsername();
-            reactivateSubscriptions(oldSession, username);
+            reactivateSubscriptions(mqttConnection, oldSession, username);
 
             // mark as connected
             final boolean connecting = oldSession.assignState(SessionStatus.DISCONNECTED, SessionStatus.CONNECTING);
@@ -173,11 +173,11 @@ public class SessionRegistry {
         return postConnectAction;
     }
 
-    private void reactivateSubscriptions(Session session, String username) {
+    private void reactivateSubscriptions(MQTTConnection connection, Session session, String username) {
         //verify if subscription still satisfy read ACL permissions
         for (Subscription existingSub : session.getSubscriptions()) {
-            final boolean topicReadable = authorizator.canRead(existingSub.getTopicFilter(), username,
-                                                               session.getClientID());
+        	final String clientAddress = NettyUtils.clientAddress(connection.channel) != null ? NettyUtils.clientAddress(connection.channel) : connection.remoteAddress().getAddress().getHostAddress();
+            final boolean topicReadable = authorizator.canRead(existingSub.getTopicFilter(), username, session.getClientID(), clientAddress);
             if (!topicReadable) {
                 subscriptionsDirectory.removeSubscription(existingSub.getTopicFilter(), session.getClientID());
             }

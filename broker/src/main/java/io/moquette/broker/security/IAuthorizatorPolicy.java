@@ -35,9 +35,10 @@ public interface IAuthorizatorPolicy {
      *            the user
      * @param client
      *            the client
+     * @param clientAddress 
      * @return true if the user from client can publish data on topic.
      */
-    boolean canWrite(Topic topic, String user, String client);
+    boolean canWrite(Topic topic, String user, String client, String clientAddress);
 
-    boolean canRead(Topic topic, String user, String client);
+    boolean canRead(Topic topic, String user, String client, String clientAddress);
 }

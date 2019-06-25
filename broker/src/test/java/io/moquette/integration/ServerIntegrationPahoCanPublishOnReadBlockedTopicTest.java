@@ -77,12 +77,12 @@ public class ServerIntegrationPahoCanPublishOnReadBlockedTopicTest {
         final IAuthorizatorPolicy switchingAuthorizator = new IAuthorizatorPolicy() {
 //            int callCount = 0;
             @Override
-            public boolean canWrite(Topic topic, String user, String client) {
+            public boolean canWrite(Topic topic, String user, String client, String clientAddress) {
                 return true;
             }
 
             @Override
-            public boolean canRead(Topic topic, String user, String client) {
+            public boolean canRead(Topic topic, String user, String client, String clientAddress) {
                 return canRead;
             }
         };

@@ -46,15 +46,16 @@ final class Authorizator {
      *            the username
      * @param msg
      *            the subscribe message to verify
+     * @param clientAddress 
      * @return the list of verified topics for the given subscribe message.
      */
-    List<MqttTopicSubscription> verifyTopicsReadAccess(String clientID, String username, MqttSubscribeMessage msg) {
+    List<MqttTopicSubscription> verifyTopicsReadAccess(String clientID, String username, MqttSubscribeMessage msg, String clientAddress) {
         List<MqttTopicSubscription> ackTopics = new ArrayList<>();
 
         final int messageId = messageId(msg);
         for (MqttTopicSubscription req : msg.payload().topicSubscriptions()) {
             Topic topic = new Topic(req.topicName());
-            if (!policy.canRead(topic, username, clientID)) {
+            if (!policy.canRead(topic, username, clientID, clientAddress)) {
                 // send SUBACK with 0x80, the user hasn't credentials to read the topic
                 LOG.warn("Client does not have read permissions on the topic CId={}, username: {}, messageId: {}, " +
                          "topic: {}", clientID, username, messageId, topic);
@@ -85,13 +86,14 @@ final class Authorizator {
      *            the user
      * @param client
      *            the client
+     * @param clientAddress 
      * @return true if the user from client can publish data on topic.
      */
-    boolean canWrite(Topic topic, String user, String client) {
-        return policy.canWrite(topic, user, client);
+    boolean canWrite(Topic topic, String user, String client, String clientAddress) {
+        return policy.canWrite(topic, user, client, clientAddress);
     }
 
-    boolean canRead(Topic topic, String user, String client) {
-        return policy.canRead(topic, user, client);
+    boolean canRead(Topic topic, String user, String client, String clientAddress) {
+        return policy.canRead(topic, user, client, clientAddress);
     }
 }

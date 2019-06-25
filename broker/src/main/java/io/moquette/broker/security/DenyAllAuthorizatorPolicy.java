@@ -21,12 +21,12 @@ import io.moquette.broker.subscriptions.Topic;
 public class DenyAllAuthorizatorPolicy implements IAuthorizatorPolicy {
 
     @Override
-    public boolean canRead(Topic topic, String user, String client) {
+    public boolean canRead(Topic topic, String user, String client, String clientAddress) {
         return false;
     }
 
     @Override
-    public boolean canWrite(Topic topic, String user, String client) {
+    public boolean canWrite(Topic topic, String user, String client, String clientAddress) {
         return false;
     }
 }

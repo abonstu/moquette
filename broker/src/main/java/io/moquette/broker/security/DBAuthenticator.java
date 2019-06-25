@@ -74,7 +74,7 @@ public class DBAuthenticator implements IAuthenticator {
     }
 
     @Override
-    public synchronized boolean checkValid(String clientId, String username, byte[] password) {
+    public synchronized boolean checkValid(String clientId, String username, byte[] password, String clientAddress) {
         // Check Username / Password in DB using sqlQuery
         if (username == null || password == null) {
             LOG.info("username or password was null");
