@@ -326,7 +326,7 @@ class NewNettyAcceptor
 		}
 
 		InetSocketAddress clientAddress = (InetSocketAddress) pipeline.channel().remoteAddress();
-		if( useProxyProtocol && ! clientAddress.getHostString().equals( "127.0.0.1" ) )
+		if( useProxyProtocol && ! clientAddress.getAddress().isLoopbackAddress() )
 		{
 			pipeline.addLast( "proxyProtocol", new HAProxyMessageDecoder() );
 			pipeline.addLast( "clientAddress", new ProxyClientAddressHandler() );

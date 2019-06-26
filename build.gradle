@@ -3,7 +3,7 @@ allprojects  {
   apply plugin: 'maven-publish'
 
   group = 'io.moquette'
-  version = '0.13-SNAPSHOT'
+  version = '0.13-EAGLE'
 }
 
 buildscript {
@@ -93,7 +93,7 @@ subprojects {
         artifact sourceJar
         groupId "$project.group"
         artifactId "${project.name}"
-        version '0.13-SNAPSHOT'
+        version '0.13-EAGLE'
       }
     }
   }
@@ -105,9 +105,9 @@ subprojects {
     pkg {
       repo = 'maven'//"${project.group}"
       name = "${project.group}.${project.name}"
-      userOrg = 'andsel'
+      userOrg = 'eagle-io'
       licenses = ['Apache-2.0']
-      vcsUrl = "https://api.bintray.com/maven/andsel/maven/${project.group}.${project.name}"
+      vcsUrl = "https://api.bintray.com/maven/eagle-io/maven/${project.group}.${project.name}"
       publications = ['bintrayPublication']
     }
   }
